@@ -5,29 +5,26 @@ const linkBase =
 
 const SideBar = () => {
   return (
-    <aside className="w-[210px] bg-[#363C48] text-white p-3">
+    <aside className="w-[210px] bg-[#212327] text-white p-3">
       <ul className="space-y-1">
         <NavLink
-          to="/"
+          to="/dashboard/new-patient"
           end
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >
-          New Token
+          New Patient
         </NavLink>
 
         <NavLink
-          to="/print-token"
+          to="/dashboard/print-token"
+          end
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >
@@ -35,38 +32,32 @@ const SideBar = () => {
         </NavLink>
 
         <NavLink
-          to="/currunt-state"
+          to="/dashboard/status"
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >
-          Currunt State
+          Current Status
         </NavLink>
 
         <NavLink
-          to="/call-token"
+          to="/dashboard/doctor-call"
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >
-          Call Token
+          Doctor Call
         </NavLink>
 
         <NavLink
-          to="/add-doctor"
+          to="/dashboard/add-doctor"
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >
@@ -74,12 +65,10 @@ const SideBar = () => {
         </NavLink>
 
         <NavLink
-          to="/add-room"
+          to="/dashboard/add-room"
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >
@@ -87,12 +76,10 @@ const SideBar = () => {
         </NavLink>
 
         <NavLink
-          to="/rooms-mapping"
+          to="/dashboard/room-mapping"
           className={({ isActive }) =>
             `${linkBase} ${
-              isActive
-                ? "bg-gray-700 text-white"
-                : "hover:bg-gray-700"
+              isActive ? "bg-[#2A2C30] text-white" : "hover:bg-[#2A2C30]"
             }`
           }
         >

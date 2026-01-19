@@ -1,34 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DashBoardLayout from "./dashboard/DashBoardLayout";
+import { Routes, Route } from "react-router-dom";
+import DashBoardLayout from "./layout/DashBoardLayout";
 
-// Pages
-import Home from "./pages/Home";
-import PrintToken from "./pages/PrintToken";
-import TokenDetails from "./pages/TokenDetails";
-import RoomsMapping from "./pages/RoomsMapping";
-import AddDoctor from "./pages/AddDoctor"; // Create these pages
+import CurrentStatus from "./pages/CurrentStatus";
+import DoctorCall from "./pages/DoctorCall";
+import AddDoctor from "./pages/AddDoctor";
 import AddRoom from "./pages/AddRoom";
-import CallToken from "./pages/CallToken";
-import CurruntState from "./pages/CurruntState";
+import RoomMapping from "./pages/RoomsMapping";
+import NewPatient from "./pages/NewPatient";
+import PrintToken from "./pages/PrintToken";
 
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Dashboard Layout */}
-        <Route path="/" element={<DashBoardLayout />}>
-          <Route index element={<Home />} />
-          <Route path="print-token" element={<PrintToken />} />
-          <Route path="token-details" element={<TokenDetails />} />
-          <Route path="rooms-mapping" element={<RoomsMapping />} />
-          <Route path="add-doctor" element={<AddDoctor />} />
-          <Route path="add-room" element={<AddRoom />} />
-          <Route path="call-token" element={<CallToken />} />
-          <Route path="currunt-state" element={<CurruntState />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/dashboard" element={<DashBoardLayout />}>
+        <Route path="new-patient" element={<NewPatient />} />
+        <Route path="print-token" element={<PrintToken />} />
+        <Route path="status" element={<CurrentStatus />} />
+        <Route path="doctor-call" element={<DoctorCall />} />
+        <Route path="add-doctor" element={<AddDoctor />} />
+        <Route path="add-room" element={<AddRoom />} />
+        <Route path="room-mapping" element={<RoomMapping />} />
+      </Route>
+    </Routes>
   );
-};
+}
 
 export default App;

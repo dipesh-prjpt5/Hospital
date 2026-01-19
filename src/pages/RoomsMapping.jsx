@@ -1,89 +1,91 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useHospital } from "../context/HospitalContext";
 
-const fakeDoctors = [
-  { id: 1, name: "Dr. Anil Gandhi" },
-  { id: 2, name: "Dr. Rekha Sharma" },
-  { id: 3, name: "Dr. John Doe" },
-];
+const RoomMapping = () => {
+  const { doctors, rooms, roomMappings, mapRoomToDoctor } = useHospital();
 
-const fakeRooms = [
-  { id: 101, room_no: "101" },
-  { id: 102, room_no: "102" },
-  { id: 103, room_no: "103" },
-];
+  const [doctorId, setDoctorId] = useState("");
+  const [roomId, setRoomId] = useState("");
 
-const RoomsMapping = () => {
-  const [selectedDoctor, setSelectedDoctor] = useState("");
-  const [selectedRoom, setSelectedRoom] = useState("");
+  const existingMapping = roomMappings.find(
+    (m) => m.doctorId === Number(doctorId),
+  );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!selectedDoctor || !selectedRoom) {
-      alert("Please select both doctor and room!");
-      return;
-    }
-
-    alert(
-      `Doctor ${selectedDoctor} is mapped to Room ${selectedRoom} successfully!`
-    );
-
-    // Reset selections
-    setSelectedDoctor("");
-    setSelectedRoom("");
+  const handleSave = () => {
+    if (!doctorId || !roomId) return;
+    mapRoomToDoctor(Number(doctorId), Number(roomId));
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen flex justify-center items-start">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
-      >
-        <h1 className="text-2xl font-bold mb-6">Map Doctor to Room</h1>
-
-        {/* Doctor Dropdown */}
-        <div className="mb-4">
-          <label className="block mb-2 font-semibold">Select Doctor</label>
-          <select
-            value={selectedDoctor}
-            onChange={(e) => setSelectedDoctor(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="">-- Select Doctor --</option>
-            {fakeDoctors.map((doc) => (
-              <option key={doc.id} value={doc.name}>
-                {doc.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Room Dropdown */}
+    <div className="flex justify-center">
+      <div className="bg-[#25262C] rounded-xl p-8 w-full max-w-4xl">
+        {/* Header */}
         <div className="mb-6">
-          <label className="block mb-2 font-semibold">Select Room</label>
-          <select
-            value={selectedRoom}
-            onChange={(e) => setSelectedRoom(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="">-- Select Room --</option>
-            {fakeRooms.map((room) => (
-              <option key={room.id} value={room.room_no}>
-                {room.room_no}
-              </option>
-            ))}
-          </select>
+          <h1 className="text-2xl font-semibold">Room Mapping</h1>
+          <p className="text-gray-400 text-sm">
+            Assign consultation rooms to doctors
+          </p>
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded font-semibold hover:bg-blue-700 transition"
-        >
-          Map Doctor
-        </button>
-      </form>
+        {/* Card */}
+        <div className="bg-[#292B31] rounded-xl p-6 shadow-lg space-y-6">
+          {/* Select Doctor */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Doctor</label>
+            <select
+              value={doctorId}
+              onChange={(e) => setDoctorId(e.target.value)}
+              className="w-full px-3 py-2 rounded-md bg-[#292B31] border border-[#3A3F4B]"
+            >
+              <option value="">Select doctor</option>
+              {doctors.map((doc) => (
+                <option key={doc.id} value={doc.id}>
+                  {doc.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Select Room */}
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Room</label>
+            <select
+              value={roomId}
+              onChange={(e) => setRoomId(e.target.value)}
+              className="w-full px-3 py-2 rounded-md bg-[#292B31] border border-[#3A3F4B]"
+            >
+              <option value="">Select room</option>
+              {rooms.map((room) => (
+                <option key={room.id} value={room.id}>
+                  Room {room.roomNumber}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Existing Mapping */}
+          {doctorId && existingMapping && (
+            <div className="text-sm text-gray-400">
+              Currently assigned to room{" "}
+              <span className="text-white font-medium">
+                {rooms.find((r) => r.id === existingMapping.roomId)?.roomNumber}
+              </span>
+            </div>
+          )}
+
+          {/* Action */}
+          <div className="flex justify-end pt-4 border-t border-[#3A3F4B]">
+            <button
+              onClick={handleSave}
+              className="bg-green-500 hover:bg-green-600 text-black font-semibold px-8 py-2 rounded-lg shadow"
+            >
+              Save Mapping
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default RoomsMapping;
+export default RoomMapping;

@@ -11,7 +11,7 @@ const DashBoardLayout = () => {
         <SideBar />
 
         <main
-          className="flex-1 p-6 bg-[#3A4050] overflow-y-auto"
+          className="flex-1 p-6 bg-[#292B2F] text-white overflow-y-auto"
         >
           <Outlet />
         </main>
